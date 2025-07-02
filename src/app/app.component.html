@@ -1,0 +1,19 @@
+<div style="height:100vh">
+  <div style="text-align:center; padding-top:32px;">
+    <h1 style="color:#3f51b5; font-size:2.5rem; margin-bottom:0.5rem;">Welcome to NG3 VR Examples</h1>
+    <p style="color:#666; font-size:1.2rem; margin-top:0;">Explore interactive 3D and VR demos built with Angular and Three.js</p>
+  </div>
+  <!--[referenceSpaceType]="'viewer'"-->
+  <ngt-canvas webvr cameraman [camera]="{ fov: 55, position: [0, 2, 4]}" shadows>
+
+    <ngt-group [position]="[0, 2.5, -2.999]">
+      <flat-ui-stats [position]="[-0.61, 0, 0]" [locked]="true" [panel]="0"></flat-ui-stats>
+      <flat-ui-stats [locked]="true" [panel]="1"></flat-ui-stats>
+      <flat-ui-stats [position]="[0.61, 0, 0]" [locked]="true" [panel]="2"></flat-ui-stats>
+    </ngt-group>
+
+    <router-outlet></router-outlet>
+
+    <ngt-stats></ngt-stats>
+  </ngt-canvas>
+</div>
