@@ -1,0 +1,268 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ng3-vr-examples": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ng3-vr-examples",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": [
+            ]
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "6mb",
+                  "maximumError": "10mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "ng3-vr-examples:build:production"
+            },
+            "development": {
+              "browserTarget": "ng3-vr-examples:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ng3-vr-examples:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "ng3-webxr": {
+      "projectType": "library",
+      "root": "projects/ng3-webxr",
+      "sourceRoot": "projects/ng3-webxr/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ng3-webxr/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng3-webxr/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ng3-webxr/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng3-webxr/src/test.ts",
+            "tsConfig": "projects/ng3-webxr/tsconfig.spec.json",
+            "karmaConfig": "projects/ng3-webxr/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ng3-flat-ui": {
+      "projectType": "library",
+      "root": "projects/ng3-flat-ui",
+      "sourceRoot": "projects/ng3-flat-ui/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ng3-flat-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng3-flat-ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ng3-flat-ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng3-flat-ui/src/test.ts",
+            "tsConfig": "projects/ng3-flat-ui/tsconfig.spec.json",
+            "karmaConfig": "projects/ng3-flat-ui/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ng3-gui": {
+      "projectType": "library",
+      "root": "projects/ng3-gui",
+      "sourceRoot": "projects/ng3-gui/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ng3-gui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng3-gui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ng3-gui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng3-gui/src/test.ts",
+            "tsConfig": "projects/ng3-gui/tsconfig.spec.json",
+            "karmaConfig": "projects/ng3-gui/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ngx-cloud-storage-types": {
+      "projectType": "library",
+      "root": "projects/ngx-cloud-storage-types",
+      "sourceRoot": "projects/ngx-cloud-storage-types/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-cloud-storage-types/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-cloud-storage-types/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-cloud-storage-types/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ngx-cloud-storage-types/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "ng3-file-list": {
+      "projectType": "library",
+      "root": "projects/ng3-file-list",
+      "sourceRoot": "projects/ng3-file-list/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ng3-file-list/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng3-file-list/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ng3-file-list/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/ng3-file-list/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "920e71bd-d214-4785-8706-ab3fd923f9b1"
+  }
+}

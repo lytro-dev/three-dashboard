@@ -1,0 +1,50 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "paths": {
+      "ng3-file-list": [
+        "projects/ng3-file-list/src/public-api"
+      ],
+      "ng3-flat-ui": [
+        "projects/ng3-flat-ui/src/public-api"
+      ],
+      "ng3-gui": [
+        "projects/ng3-gui/src/public-api"
+      ],
+      "ng3-webxr": [
+        "projects/ng3-webxr/src/public-api"
+      ],
+      "ngx-cloud-storage-types": [
+        "projects/ngx-cloud-storage-types/src/public-api"
+      ]
+    },
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "es2020",
+    "lib": [
+      "es2020",
+      "dom"
+    ],
+    "skipLibCheck": true,
+    "useDefineForClassFields": false
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}
