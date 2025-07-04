@@ -1,0 +1,20 @@
+<flat-ui-base-button #parent [name]="name" [visible]="visible" [position]="position" [rotation]="rotation" [scale]="scale"
+                     [text]="text" [enabled]="enabled"
+                     [width]="width" [height]="height"
+                     [buttonmaterial]="buttonmaterial"
+                     [disabledmaterial]="disabledmaterial"
+                     [outlinematerial]="outlinematerial"
+                     [selectable]="selectable"
+                     [stoppropagation]="stoppropagation"
+                     (hover)="hover.next($event)"
+                     (pressed)="pressed.next($event)" (ready)="ready.next($event)">
+
+  <ng-template #button let-parent="parent">
+    <ngt-soba-text [appendTo]="parent" [text]="displaytext" [material]="labelmaterial" [fontSize]="fontsize" [anchorX]="textjustify" [position]="[0, 0, 0.001]"></ngt-soba-text>
+  </ng-template>
+
+  <ng-container *ngIf="templateRef"
+                [ngTemplateOutlet]="templateRef"
+                [ngTemplateOutletContext]="{ parent: parent.instance.value }">
+  </ng-container>
+</flat-ui-base-button>

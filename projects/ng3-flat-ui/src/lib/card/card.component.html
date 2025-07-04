@@ -1,0 +1,24 @@
+<ngt-group #parent [name]="name" [visible]="visible" [position]="position" [rotation]="rotation" [scale]="scale"
+           (ready)="panelready($event)" draggable>
+
+  <ngt-mesh #mesh
+            [geometry]="geometry" [material]="cardmaterial"
+            (pointerdown)="startdragging();$event.stopPropagation()" (pointerup)="enddragging()"
+            (pointerover)="over();pointerover.next($event)" (pointerout)="out();pointerout.next($event)"
+            (pointermove)="movemesh($event)"
+            (ready)="meshready($event)">
+
+    <ng-container [ngTemplateOutlet]="card ? card : defaultCard"
+                  [ngTemplateOutletContext]="{ parent: parent.instance.value }">
+    </ng-container>
+
+    <ng-template #defaultCard>
+      <!--empty-->
+    </ng-template>
+
+  </ngt-mesh>
+
+  <ngt-line (ready)="lineready($event)"
+            [geometry]="outline" [material]="outlinematerial"> </ngt-line>
+
+</ngt-group>
