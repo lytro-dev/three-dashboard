@@ -1,0 +1,16 @@
+<ngt-group [name]="name" [visible]="visible" [position]="position" [rotation]="rotation" [scale]="scale">
+
+  <ngt-group [position]="[0, 0, 0.001]">
+
+    <ngt-mesh #mesh
+              (pointerover)="over()" (pointerout)="out()" (click)="enableinput(mesh.instance.value)"
+              [geometry]="geometry"
+              (ready)="meshready($event)">
+    </ngt-mesh>
+
+    <ngt-line (ready)="lineready($event)"
+              [geometry]="outline" [material]="outlinematerial"> </ngt-line>
+
+  </ngt-group>
+
+</ngt-group>

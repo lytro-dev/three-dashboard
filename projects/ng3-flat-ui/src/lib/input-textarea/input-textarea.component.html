@@ -1,0 +1,26 @@
+<ngt-group [name]="name" [visible]="visible" [position]="position" [rotation]="rotation" [scale]="scale">
+
+  <ngt-mesh #mesh
+            (click)="enableinput($event, mesh.instance.value)"
+            (pointermove)="doover($event, mesh.instance.value)"
+            (pointerout)="out();$event.stopPropagation()"
+            [geometry]="geometry" (wheel)="scroll($event)"
+            (ready)="meshready($event)">
+
+    <ngt-soba-text [text]="displaytext"
+                   [material]="textmaterial"
+                   [anchorX]="'left'"
+                   [anchorY]="'top'"
+                   [font]="font"
+                   [maxWidth]="width"
+                   [fontSize]="fontsize"
+                   [position]="[-width/2+0.01, height/2, 0.001]"
+                   (ready)="textready($event)">
+    </ngt-soba-text>
+
+  </ngt-mesh>
+
+  <ngt-line (ready)="lineready($event)"
+            [geometry]="outline" [material]="outlinematerial"> </ngt-line>
+
+</ngt-group>

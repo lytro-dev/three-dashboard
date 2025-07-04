@@ -1,0 +1,13 @@
+<ngt-group [name]="name" [visible]="visible" [position]="position" [rotation]="rotation" [scale]="scale">
+  <ngt-mesh #mesh 
+            (click)="clicked(mesh.instance.value, $event)" (pointermove)="over()" (pointerout)="out()"
+            [geometry]="geometry" 
+            (ready)="meshready($event)">
+
+    <flat-ui-icon [position]="[0, 0, 0.001]" [width]="width" [svg]="svg" [url]="url" [iconmaterial]="iconmaterial"></flat-ui-icon>
+  </ngt-mesh>
+
+  <ngt-line (ready)="lineready($event)"
+            [geometry]="outline" [material]="outlinematerial"> </ngt-line>
+
+</ngt-group>
