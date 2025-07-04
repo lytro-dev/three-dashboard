@@ -1,0 +1,34 @@
+{
+  "name": "ng3-webxr",
+  "version": "0.0.14",
+  "author": "anidivr",
+  "homepage": "https://ng3vr.z9.web.core.windows.net/",
+  "repository": "https://github.com/IRobot1/ng3-vr-examples/tree/master/projects/ng3-webxr",
+  "license": "MIT",
+  "keywords": [
+    "three",
+    "three.js",
+    "threejs",
+    "3d",
+    "virtual-reality",
+    "augmented-reality",
+    "webgl",
+    "webgl2",
+    "webxr",
+    "canvas",
+    "angular",
+    "angular-three",
+    "ar",
+    "vr",
+    "ng3",
+    "ngt"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^14.1.0",
+    "@angular/core": "^14.1.0",
+    "@angular-three/core": "^6.0.1"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}

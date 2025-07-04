@@ -1,0 +1,67 @@
+<ngt-group [ngSwitch]="item.classname">
+  <ng-template [ngSwitchCase]="'options'">
+    <ngt-group horizontal-layout [margin]="0.02">
+      <flat-ui-label [text]="item.title" [width]="0.8"></flat-ui-label>
+      <flat-ui-select #list [text]="listvalue" [width]="1" [selectable]="selectable" [enabled]="item.enabled"
+                      (change)="listvalue=$event" (openinput)="input.openlist($event, list, item._min, listvalue)">
+      </flat-ui-select>
+    </ngt-group>
+  </ng-template>
+  <ng-template [ngSwitchCase]="'number'">
+    <ngt-group horizontal-layout [margin]="0.02">
+      <flat-ui-label [text]="item.title" [width]="0.8"></flat-ui-label>
+      <flat-ui-input-slider [visible]="item._min != undefined && item._max != undefined" [width]="0.5" [min]="item._min" [max]="item._max"
+                            [step]="item._step" [value]="numbervalue" [selectable]="selectable" [enabled]="item.enabled"
+                            (change)="numbervalue=$event">
+      </flat-ui-input-slider>
+      <flat-ui-input-number #numpad [min]="item._min" [max]="item._max" [text]="textvalue"
+                            [enabled]="item.enabled" [selectable]="selectable"
+                            (change)="numbervalue=$event" (enter)="enter()" (openinput)="input.opennumpad($event, numpad, textvalue)">
+      </flat-ui-input-number>
+    </ngt-group>
+  </ng-template>
+  <ng-template [ngSwitchCase]="'boolean'">
+    <ngt-group horizontal-layout [margin]="0.02">
+      <flat-ui-label [text]="item.title" [width]="0.8"></flat-ui-label>
+      <flat-ui-input-checkbox [checked]="boolvalue" (change)="boolValue=$event" [selectable]="selectable" [enabled]="item.enabled">
+      </flat-ui-input-checkbox>
+    </ngt-group>
+  </ng-template>
+  <ng-template [ngSwitchCase]="'string'">
+    <ngt-group horizontal-layout [margin]="0.02">
+      <flat-ui-label [text]="item.title" [width]="0.8"></flat-ui-label>
+      <flat-ui-input-text #keyboard [text]="textvalue" [overflow]="10" [selectable]="selectable" [enabled]="item.enabled"
+                          (change)="textvalue=$event" (enter)="enter()" (openinput)="input.openkeyboard($event, keyboard, textvalue)">
+      </flat-ui-input-text>
+    </ngt-group>
+  </ng-template>
+  <ng-template [ngSwitchCase]="'textarea'">
+    <ngt-group horizontal-layout [margin]="0.02">
+      <flat-ui-label [text]="item.title" [width]="0.8"></flat-ui-label>
+      <flat-ui-input-textarea #keyboard [text]="textvalue" [width]="item._min != undefined ? item._min : 0.5" [height]="item._max != undefined ? item._max : 0.17" [selectable]="selectable" [enabled]="item.enabled"
+                          (change)="textvalue=$event" (enter)="enter()" (openinput)="input.openkeyboard($event, keyboard, textvalue)">
+      </flat-ui-input-textarea>
+    </ngt-group>
+  </ng-template>
+  <ng-template [ngSwitchCase]="'function'">
+    <ngt-group horizontal-layout [margin]="0.02">
+      <flat-ui-button [text]="item.title" [width]="width-0.04" [selectable]="selectable" [enabled]="item.enabled"
+                      (pressed)="execute()">
+      </flat-ui-button>
+    </ngt-group>
+  </ng-template>
+  <ng-template [ngSwitchCase]="'color'">
+    <ngt-group horizontal-layout [margin]="0.02">
+      <flat-ui-label [text]="item.title" [width]="0.8"></flat-ui-label>
+      <flat-ui-input-color #color [text]="colorvalue" [selectable]="selectable" [enabled]="item.enabled"
+                           (change)="colorvalue=$event" (openinput)="input.opencolor($event, color)">
+      </flat-ui-input-color>
+      <flat-ui-input-text [text]="textvalue" [overflow]="10" [enabled]="false"></flat-ui-input-text>
+    </ngt-group>
+  </ng-template>
+  <ng-template [ngSwitchCase]="'folder'">
+    <ngt-group horizontal-layout>
+      <ng3-gui-folder [gui]="item.object" [selectable]="selectable"></ng3-gui-folder>
+    </ngt-group>
+  </ng-template>
+</ngt-group>
