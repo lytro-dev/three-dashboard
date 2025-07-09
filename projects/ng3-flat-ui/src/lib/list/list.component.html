@@ -1,0 +1,35 @@
+<ngt-group [name]="name" [visible]="visible" [position]="position" [rotation]="rotation" [scale]="scale" (ready)="group = $event" (beforeRender)="tick()">
+  <ngt-mesh [geometry]="geometry" [material]="popupmaterial"
+            (pointerover)="over();$event.stopPropagation()"
+            (pointerout)="out();$event.stopPropagation()"
+            (ready)="meshready($event)" (pointermissed)="missed()">
+  </ngt-mesh>
+
+  <ngt-line (ready)="lineready($event)"
+            [geometry]="outline" [material]="outlinematerial"> </ngt-line>
+
+
+  <ngt-group #parent *ngFor="let item of data; index as index" [position]="item.position" [visible]="item.enabled">
+
+    <ngt-mesh [visible]="item.selected" [position]="item.selectposition" [material]="listselectmaterial">
+      <ngt-plane-geometry [args]="[planewidth, planeheight]"></ngt-plane-geometry>
+    </ngt-mesh>
+
+    <ng-container [ngTemplateOutlet]="listItem ? listItem : defaultListItem"
+                  [ngTemplateOutletContext]="{ index: index, list: this, text: item.text, data: item.data, width: width-margin*2, parent: parent.instance.value }">
+    </ng-container>
+
+    <ng-template #defaultListItem let-text="text" let-width="width">
+      <flat-ui-button [selectable]="selectable" [text]="text" [width]="width" (pressed)="selected(index)"></flat-ui-button>
+    </ng-template>
+
+  </ngt-group>
+
+
+  <flat-ui-label [visible]="list.length==0" [position]="emptyposition" [width]="width" [text]="emptytext"></flat-ui-label>
+
+  <flat-ui-paginator *ngIf="showpaging" [paging]="this" [selectable]="selectable" [buttonsize]="pagebuttonsize"
+                     [position]="[-width/2+margin, -height/2 + pagebuttonsize/2+margin, 0.001]" [showlabel]="showpagecounts">
+  </flat-ui-paginator>
+
+</ngt-group>

@@ -1,0 +1,27 @@
+<ngt-group [name]="name" [visible]="visible" [position]="position" [rotation]="rotation" [scale]="scale">
+
+  <ngt-mesh #mesh
+            [geometry]="geometry" [material]="popupmaterial"
+            (click)="ignore(mesh.instance.value, $event)" (pointerover)="$event.stopPropagation()"
+            (ready)="meshready($event)" (pointermissed)="missed()">
+  </ngt-mesh>
+
+  <flat-ui-base-button *ngFor="let item of keys" [selectable]="selectable"
+                       [position]="item.position" [width]="item.size" 
+                       (pressed)="clicked(keycode(item))">
+
+    <ng-template #button let-parent="parent">
+      <ngt-soba-text [appendTo]="parent" [text]="keycode(item)" [material]="labelmaterial" [position]="[0, 0, 0.001]"></ngt-soba-text>
+    </ng-template>
+  </flat-ui-base-button>
+
+  <flat-ui-base-button *ngFor="let item of icons" [selectable]="selectable"
+                       [position]="item.position" [width]="0.15"
+                       (pressed)="clicked(iconcode(item))">
+
+    <ng-template #button let-parent="parent">
+      <flat-ui-material-icon [appendTo]="parent" [text]="item.icon" [labelmaterial]="labelmaterial" [position]="[0, 0, 0.001]"></flat-ui-material-icon>
+    </ng-template>
+  </flat-ui-base-button>
+
+</ngt-group>

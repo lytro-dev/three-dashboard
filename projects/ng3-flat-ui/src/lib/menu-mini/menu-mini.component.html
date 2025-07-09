@@ -1,0 +1,23 @@
+<ngt-group [ngtObjectPassThrough]="this">
+  <ng-container *ngFor="let item of icons">
+
+    <flat-ui-material-button *ngIf="item.menu.icon" [visible]="item.menu.visible" [position]="item.position"
+                             [enabled]="item.menu.enabled" [text]="item.menu.icon"
+                             [selectable]="selectable" [stoppropagation]="stoppropagation"
+                             [labelmaterial]="item.menu.color" [buttonmaterial]="buttonmaterial"
+                             [outlinematerial]="outlinematerial" [disabledmaterial]="disabledmaterial"
+                             (hover)="hover($event, item)" (pressed)="pressed(item.menu)">
+    </flat-ui-material-button>
+
+    <flat-ui-button *ngIf="!item.menu.icon" [visible]="item.menu.visible" [position]="item.position"
+                    [labelmaterial]="item.menu.color" [buttonmaterial]="buttonmaterial"
+                    [outlinematerial]="outlinematerial" [disabledmaterial]="disabledmaterial"
+                    [text]="item.menu.keycode" [width]="0.1" [enabled]="item.menu.enabled"
+                    [selectable]="selectable" [stoppropagation]="stoppropagation"
+                    (hover)="hover($event, item)" (pressed)="pressed(item.menu)">
+    </flat-ui-button>
+
+  </ng-container>
+
+  <flat-ui-label [text]="text" [position]="[0.5, -0.1, 0.002]" [labelmaterial]="labelmaterial"></flat-ui-label>
+</ngt-group>
