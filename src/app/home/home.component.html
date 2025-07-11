@@ -1,0 +1,44 @@
+<!-- Home Scene: Professional Feature Panel Layout -->
+<div class="home-container">
+  <ngt-color attach="background" color="gray"></ngt-color>
+
+  <ngt-mesh>
+    <ngt-cylinder-geometry [args]="[1, 1, 0.1, 32]"></ngt-cylinder-geometry>
+  </ngt-mesh>
+
+  <ngt-point-light intensity="0.75" [position]="[0, 1, 0]"></ngt-point-light>
+
+  <!-- Top Row Features -->
+  <ngt-group [position]="[0, 1.5, 0]">
+    <ngt-group *ngFor="let panel of topPanels" [rotation]="[0, panel.rotation | radian, 0]">
+      <portal [asset]="panel.route" [text]="panel.label" [position]="[0, 0, -4.1]" [selectable]="selectableObjects" (portalSelected)="onSelect($event)"></portal>
+    </ngt-group>
+  </ngt-group>
+
+  <!-- Middle Row Features -->
+  <ngt-group [position]="[0, 0, 0]">
+    <ngt-group *ngFor="let panel of middlePanels" [rotation]="[0, panel.rotation | radian, 0]">
+      <portal [asset]="panel.route" [text]="panel.label" [position]="[0, 0, -4.1]" [selectable]="selectableObjects" (portalSelected)="onSelect($event)"></portal>
+    </ngt-group>
+  </ngt-group>
+
+  <!-- Bottom Row Features -->
+  <ngt-group [position]="[0, -1.5, 0]">
+    <ngt-group *ngFor="let panel of bottomPanels" [rotation]="[0, panel.rotation | radian, 0]">
+      <portal [asset]="panel.route" [text]="panel.label" [position]="[0, 0, -4.1]" [rotation]="[-30 | radian, 0, 0]" [selectable]="selectableObjects" (portalSelected)="onSelect($event)"></portal>
+    </ngt-group>
+  </ngt-group>
+
+  <!-- VR Controllers -->
+  <vr-controller showcontroller trackedpointer
+                 select [selectable]="selectableObjects" (selected)="onIntersect($event)"
+                 (selectHighlight)="onHighlight($event)" (selectUnhighlight)="onUnhighlight($event)">
+  </vr-controller>
+
+  <vr-controller [index]="1" showcontroller trackedpointer
+                 select [selectable]="selectableObjects" (selected)="onIntersect($event)"
+                 (selectHighlight)="onHighlight($event)" (selectUnhighlight)="onUnhighlight($event)">
+  </vr-controller>
+
+  <ngt-soba-orbit-controls></ngt-soba-orbit-controls>
+</div>
