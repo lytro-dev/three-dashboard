@@ -1,0 +1,37 @@
+<ngt-color attach="background" color="darkgray"></ngt-color>
+
+<line-room></line-room>
+
+<ngt-directional-light [position]="[10, 10, 10]" castShadow></ngt-directional-light>
+
+<ngt-mesh #inst (ready)="torus=inst.instance.value" [position]="lookat" [scale]="0.5" (beforeRender)="tick()">
+  <ngt-torus-knot-geometry [args]="[0.6,0.2,150,20,2,3]">
+  </ngt-torus-knot-geometry>
+  <ngt-mesh-standard-material color="cornflowerblue"></ngt-mesh-standard-material>
+</ngt-mesh>
+
+<wall [position]="[0, 1, -0.3]" [scale]="[0.5, 0.12, 0.15]" color="#595959"></wall>
+
+<mesh-box-button [position]="[-0.15, 1.04, -0.3]" [scale]="[0.08, 0.1, 0.08]" buttoncolor="orange" [selectable]="selectable"
+                 (selected)="selected($event)" (buttonHighlight)="highlight($event)" (buttonUnhighlight)="unhighlight($event)">
+</mesh-box-button>
+<mesh-box-button [position]="[-0.05, 1.04, -0.3]" [scale]="[0.08, 0.1, 0.08]" buttoncolor="pink" [selectable]="selectable"
+                 (selected)="selected($event)" (buttonHighlight)="highlight($event)" (buttonUnhighlight)="unhighlight($event)">
+</mesh-box-button>
+<mesh-box-button [position]="[0.05, 1.04, -0.3]" [scale]="[0.08, 0.1, 0.08]" buttoncolor="cyan" [selectable]="selectable"
+                 (selected)="selected($event)" (buttonHighlight)="highlight($event)" (buttonUnhighlight)="unhighlight($event)">
+</mesh-box-button>
+<mesh-box-button [position]="[0.15, 1.04, -0.3]" [scale]="[0.08, 0.1, 0.08]" buttoncolor="cornflowerblue" [text]="'Reset'" [selectable]="selectable"
+                 (selected)="selected($event)" (buttonHighlight)="highlight($event)" (buttonUnhighlight)="unhighlight($event)">
+</mesh-box-button>
+
+<vr-controller showcontroller trackedpointer navhome
+               select [selectable]="selectable"
+               (selectHighlight)="highlight($event.object)" (selectUnhighlight)="unhighlight($event.object)">
+</vr-controller>
+<vr-controller [index]="1" showcontroller trackedpointer navhome
+               select [selectable]="selectable"
+               (selectHighlight)="highlight($event.object)" (selectUnhighlight)="unhighlight($event.object)">
+</vr-controller>
+
+<mouse-touch-input [intersectObjects]="selectable"></mouse-touch-input>
