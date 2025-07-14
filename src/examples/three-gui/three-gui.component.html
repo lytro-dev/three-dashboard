@@ -1,0 +1,51 @@
+<ngt-color attach="background" color="darkgray"></ngt-color>
+
+<ngt-mesh>
+  <ngt-cylinder-geometry [args]="[1, 1, 0.1, 32]"></ngt-cylinder-geometry>
+</ngt-mesh>
+
+<ngt-point-light></ngt-point-light>
+
+
+<vr-controller guipointer showcontroller trackedpointer navhome [guis]="selectable.list"></vr-controller>
+<vr-controller [index]="1" guipointer showcontroller trackedpointer navhome [guis]="selectable.list"></vr-controller>
+
+<ngt-group>
+
+  <ng3-gui *ngFor="let item of leftwall"
+           [position]="item.position" [scale]="0.8"
+           [gui]="item.gui" [selectable]="selectable"
+           [showclose]="false" [scalable]="false" [expanded]="item.expanded">
+  </ng3-gui>
+</ngt-group>
+
+<ngt-group>
+
+  <ng3-gui *ngFor="let item of frontwall"
+           [position]="item.position" [scale]="0.8"
+           [gui]="item.gui" [selectable]="selectable"
+           [showclose]="false" [scalable]="false" [expanded]="item.expanded">
+  </ng3-gui>
+</ngt-group>
+
+<ngt-group>
+
+  <ng3-gui *ngFor="let item of rightwall"
+           [position]="item.position" [scale]="0.8"
+           [gui]="item.gui" [selectable]="selectable"
+           [showclose]="false" [scalable]="false" [expanded]="item.expanded">
+  </ng3-gui>
+</ngt-group>
+
+<ngt-group>
+
+  <ng3-gui *ngFor="let item of backwall"
+           [position]="item.position" [scale]="0.8"
+           [gui]="item.gui" [selectable]="selectable"
+           [showclose]="false" [scalable]="false" [expanded]="item.expanded">
+  </ng3-gui>
+</ngt-group>
+
+
+<ngt-soba-orbit-controls></ngt-soba-orbit-controls>
+

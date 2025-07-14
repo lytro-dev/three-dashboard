@@ -1,0 +1,72 @@
+<ngt-color attach="background" color="darkgray"></ngt-color>
+
+<!--<ngt-mesh>
+  <ngt-cylinder-geometry [args]="[1, 1, 0.1, 32]"></ngt-cylinder-geometry>
+</ngt-mesh>-->
+
+<ngt-ambient-light intensity="0.1"></ngt-ambient-light>
+
+<ngt-point-light></ngt-point-light>
+
+<ngt-mesh-basic-material #curvematerial color="black"></ngt-mesh-basic-material>
+<ngt-mesh-basic-material #linematerial color="green"></ngt-mesh-basic-material>
+<ngt-mesh-basic-material #graymaterial color="#555"></ngt-mesh-basic-material>
+
+<ngt-mesh-standard-material #extrudematerial [color]="extrudeparams.color"></ngt-mesh-standard-material>
+<ngt-mesh-standard-material #lathematerial [color]="latheparams.color"></ngt-mesh-standard-material>
+
+<flat-ui-drag-plane [size]="2" [position]="[0, yoffset, -1]" [selectable]="selectable" [showgrid]="params.snap"
+                    (change)="hit($event)" (click)="closemenus()" (dragend)="enddrag()" [rotation]="params.tilt ? [-90 | radian, 0, 0] : [0, 0, 0]">
+
+  <ng-template let-parent="parent">
+    <ngt-group [appendTo]="parent">
+
+      <path-point *ngFor="let item of points" [point]="item" [selectable]="selectable" [visible]="params.showpoints"
+                  (dragging)="startdrag(item)" (click)="changelast(item)" [size]="0.02">
+      </path-point>
+
+      <ngt-line *ngFor="let item of curves" [geometry]="item"
+                [material]="curvematerial.instance.value">
+      </ngt-line>
+
+      <ngt-line *ngFor="let item of controllines" [geometry]="item" [visible]="params.showpoints"
+                [material]="linematerial.instance.value">
+      </ngt-line>
+
+      <flat-ui-material-button *ngIf="showmore" [scale]="scale"
+                               [text]="'more_horiz'" [position]="moreposition" [selectable]="selectable"
+                               (pressed)="morepressed()">
+      </flat-ui-material-button>
+
+      <flat-ui-menu-mini *ngIf="showmenu" [scale]="scale"
+                         [position]="menuposition" [menuitems]="menuitems" [selectable]="selectable">
+      </flat-ui-menu-mini>
+
+      <flat-ui-menu-mini *ngIf="showactions" [scale]="scale"
+                         [position]="actionposition" [menuitems]="actionmenu" [selectable]="selectable">
+      </flat-ui-menu-mini>
+
+      <flat-ui-menu-mini *ngIf="showtranslate" [scale]="scale"
+                         [position]="actionposition" [menuitems]="translatemenu" [selectable]="selectable">
+      </flat-ui-menu-mini>
+
+
+      <ngt-mesh [geometry]="shapegeometry" [material]="graymaterial.instance.value" [position]="[0, 0, shapez]"></ngt-mesh>
+      <ngt-mesh *ngIf="params.showextrude" [geometry]="extrudegeometry" [material]="extrudematerial.instance.value" [position]="[1.6, 0, 0.5]" (beforeRender)="tick($event.object, extrudeparams.animate )" (ready)="extrudemesh = $event"></ngt-mesh>
+      <ngt-mesh *ngIf="params.showlathe" [geometry]="lathegeometry" [material]="lathematerial.instance.value" [position]="[-1.6, 0, 0.5]" (beforeRender)="tick($event.object, latheparams.animate)" (ready)="lathemesh = $event"></ngt-mesh>
+
+    </ngt-group>
+  </ng-template>
+
+</flat-ui-drag-plane>
+
+<ng3-gui [position]="[0, yoffset-1.25, guiz+0.02-1]" [gui]="pathgui" [sixdof]="false" [scalable]="false" [expanded]="true" [selectable]="selectable" [scale]="scale"></ng3-gui>
+<ng3-gui *ngIf="params.showextrude" [position]="[1.5, yoffset+0.7, guiz+0.01-1]" [gui]="extrudegui" [sixdof]="false" [scalable]="false" [expanded]="true" [selectable]="selectable" [scale]="scale"></ng3-gui>
+<ng3-gui *ngIf="params.showlathe" [position]="[-1.5, yoffset+0.7, guiz-1]" [gui]="lathegui" [sixdof]="false" [scalable]="false" [expanded]="true" [selectable]="selectable" [scale]="scale"></ng3-gui>
+
+<!--<path-command-list [position]="[0, 1, -0.9]" [selectable]="selectable" [commands]="commands"></path-command-list>-->
+
+<vr-controller guipointer showcontroller trackedpointer navhome [guis]="selectable.list"></vr-controller>
+<vr-controller [index]="1" guipointer showcontroller trackedpointer navhome [guis]="selectable.list"></vr-controller>
+
+<ngt-soba-orbit-controls vrorbit [enableRotate]="false"></ngt-soba-orbit-controls>

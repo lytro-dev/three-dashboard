@@ -1,0 +1,37 @@
+<ngt-group [ngtObjectPassThrough]="this" (beforeRender)="tick()">
+  <ngt-group #xparent *ngFor="let item of display">
+    <ng-container [ngTemplateOutlet]="xaxis ? xaxis: defaultAxisX"
+                  [ngTemplateOutletContext]="{ x: item.x, data: item.data }">
+    </ng-container>
+  </ngt-group>
+
+  <ng-template #defaultAxisX let-x="x" let-data="data" let-parent="xparent.instance.value">
+    <flat-ui-label [text]="data.label" [width]="0" [rotation]="[-90 | radian, 0, -90 | radian]"
+                   [position]="[x, 0, 0.05]">
+    </flat-ui-label>
+  </ng-template>
+
+  <ngt-group *ngFor="let item of display" [position]="[item.x, 0.001, 0]">
+    <ngt-mesh [geometry]="item.data.geometry" [material]="item.data.material" castShadow></ngt-mesh>
+
+    <ng-container [ngTemplateOutlet]="object ? object: defaultObject"
+                  [ngTemplateOutletContext]="{ x: item.x, y: item.y, data: item.data }">
+    </ng-container>
+  </ngt-group>
+
+  <ng-template #defaultObject>
+  </ng-template>
+
+  <ng-container *ngFor="let item of display">
+    <ng-container [ngTemplateOutlet]="value ? value: defaultValue"
+                  [ngTemplateOutletContext]="{ x: item.x, y: item.y, data: item.data }">
+    </ng-container>
+
+  </ng-container>
+
+  <ng-template #defaultValue let-x="x" let-y="y" let-data="data">
+    <flat-ui-label [text]="data.value" [alignx]="'center'"
+                   [position]="[x, y+0.05, 0]">
+    </flat-ui-label>
+  </ng-template>
+</ngt-group>

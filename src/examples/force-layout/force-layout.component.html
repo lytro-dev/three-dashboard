@@ -1,0 +1,46 @@
+<ngt-color attach="background" color="darkgray"></ngt-color>
+
+<line-room></line-room>
+
+<ngt-directional-light [position]="[0, 10, 0]"></ngt-directional-light>
+
+<ngt-group [position]="[0, 1.5, -1]" [scale]="scale" (beforeRender)="tick($event.object)">
+  <force-layout-diagram [graph]="graph"
+                   [origin]="[0, 1.5, -1]"
+                   [list]="list"
+                   (stable)="stable=$event">
+  </force-layout-diagram>
+</ngt-group>
+
+<!-- limitation in ngraph only allows opening one diagram at a time -->
+<ngt-group #diag [position]="[0, 1.5, 1]" [scale]="scale">
+  <force-layout-diagram [graph]="customgraph"
+                   [origin]="[0, 1.5, 1]"
+                   [dimensions]="2"
+                   [animate]="true"
+                   [showLinkLabel]="true"
+                   [list]="list" (stable)="flipAfterLoad($event, diag.instance.value)">
+  </force-layout-diagram>
+
+</ngt-group>
+
+<ngt-soba-text *ngIf="loading"
+               [text]="'Loading...'"
+               [position]="[0, 1.5, 1]"
+               [fontSize]="0.1"
+               [font]="'https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff'"
+               anchorX="center"
+               anchorY="bottom" [rotation]="[0, 180 | radian, 0]">
+</ngt-soba-text>
+
+
+<vr-controller showcontroller trackedpointer navhome
+               select [selectable]="list"
+               (selectHighlight)="highlight($event.object)" (selectUnhighlight)="unhighlight($event.object)"></vr-controller>
+
+<vr-controller [index]="1"
+               showcontroller trackedpointer navhome
+               select [selectable]="list"
+               (selectHighlight)="highlight($event.object)" (selectUnhighlight)="unhighlight($event.object)"></vr-controller>
+
+<ngt-soba-orbit-controls [target]="[0, 1.5, 0]"></ngt-soba-orbit-controls>

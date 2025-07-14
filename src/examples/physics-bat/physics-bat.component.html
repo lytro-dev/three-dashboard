@@ -1,0 +1,22 @@
+<ngt-color attach="background" color="darkgray"></ngt-color>
+
+<ngt-directional-light [position]="[10, 10, 10]" castShadow></ngt-directional-light>
+
+<ngt-physics [gravity]="[0, -5, 0]" [stepSize]="1/1000">
+  <ngt-cannon-debug disabled scale="1.1" color="red">
+
+    <vr-controller bat navhome></vr-controller>
+    <vr-controller [index]="1" bat navhome></vr-controller>
+
+    <projectiles (fire)="gamestate.subRemaining()"></projectiles>
+
+    <target [position]="[0,1.1,-5]" [color]="'yellow'" [rotation]="[1.57,0,0]" [scale]="[1,1,1]" (hit)="gamestate.addPoints(1)"></target>
+
+    <floor [color]="'darkgreen'"></floor>
+  </ngt-cannon-debug>
+</ngt-physics>
+
+
+<ngt-grid-helper [position]="[0, 0, 0]"></ngt-grid-helper>
+
+<ngt-soba-orbit-controls></ngt-soba-orbit-controls>

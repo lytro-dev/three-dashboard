@@ -1,0 +1,23 @@
+<ngt-mesh #parent [name]="name"
+          [position]="position" [rotation]="rotation"
+          (click)="doclick($event, parent.instance.value)"
+          (pointerdown)="startdrag($event.intersections[0])" (pointerup)="enddrag($event.intersections[0])"
+          (pointermove)="move($event, parent.instance.value)"
+          (ready)="meshready($event)">
+  <ngt-plane-geometry [args]="[size, size]"></ngt-plane-geometry>
+
+  <ngt-group *ngIf="showgrid">
+    <ngt-soba-text *ngFor="let item of axis" [text]="item.text"
+                   [anchorX]="'right'"
+                   [fontSize]="fontsize"
+                   [material]="labelmaterial"
+                   [position]="item.position">
+    </ngt-soba-text>
+  </ngt-group>
+
+  <ng-container *ngIf="templateRef"
+                [ngTemplateOutlet]="templateRef"
+                [ngTemplateOutletContext]="{ parent: parent.instance.value }">
+  </ng-container>
+
+</ngt-mesh>

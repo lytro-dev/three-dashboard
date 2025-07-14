@@ -1,0 +1,18 @@
+<ngt-mesh #mesh (ready)="meshready(mesh.instance.value)" castShadow receiveShadow
+          animateclick [position]="position" [scale]="scale" (animateCompleted)="selected.next(mesh.instance.value)">
+  <ngt-box-geometry></ngt-box-geometry>
+  <ngt-mesh-standard-material [color]="buttoncolor"></ngt-mesh-standard-material>
+
+
+  <ngt-soba-text [text]="text"
+                 [castShadow]="true"
+                 [color]="textcolor"
+                 [maxWidth]="8"
+                 [fontSize]="0.3"
+                 font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
+                 anchorX="center"
+                 anchorY="middle"
+                 [position]="[0, 0.501, 0]"
+                 [rotation]="[-90 | radian, 0, 0]">
+  </ngt-soba-text>
+</ngt-mesh>

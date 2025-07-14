@@ -1,0 +1,225 @@
+<ngt-color attach="background" color="darkgray"></ngt-color>
+
+<line-room></line-room>
+
+<ngt-ambient-light></ngt-ambient-light>
+
+
+<ngt-group ngtBoxHelper>
+</ngt-group>
+
+
+<flat-ui-drag-panel [title]="'Controls Panel'" [scalable]="false" [resizable]="true"
+                    [width]="controlwidth" [height]="controlheight" (heightchange)="controlheight=$event" (widthchange)="controlwidth=$event"
+                    [showclose]="false" [position]="[-1.6, 1, -2.001]" [rotation]="[0, 30 | radian, 0]" [selectable]="selectable">
+  <ng-template let-parent="parent">
+    <ngt-group vertical-layout [appendTo]="parent" [margin]="0.02" [position]="[-controlwidth/2+0.05, controlheight/2, 0.002]">
+
+      <ngt-group horizontal-layout>
+        <flat-ui-label [text]="'radio'" [width]="0.6"></flat-ui-label>
+        <flat-ui-radio-group [value]="radiovalue" (change)="radiochange($event)">
+          <flat-ui-radio-button [value]="0" [selectable]="selectable" (change)="changed($event)"></flat-ui-radio-button>
+          <flat-ui-label [text]="'Zero'" [width]="0.4"></flat-ui-label>
+          <flat-ui-radio-button [value]="1" [selectable]="selectable" (change)="changed($event)" [segments]="6"></flat-ui-radio-button>
+          <flat-ui-label [text]="'One'" [width]="0.4"></flat-ui-label>
+          <flat-ui-radio-button [value]="2" [selectable]="selectable" [enabled]="false" (change)="changed($event)" [segments]="8" [rotation]="[0, 0, 22.5 |radian]"></flat-ui-radio-button>
+          <flat-ui-label [text]="'Two'" [width]="0.4"></flat-ui-label>
+        </flat-ui-radio-group>
+      </ngt-group>
+
+      <ngt-group horizontal-layout>
+        <flat-ui-divider [width]="controlwidth-0.1"></flat-ui-divider>
+      </ngt-group>
+
+      <ngt-group horizontal-layout>
+        <flat-ui-label [text]="'number'" [width]="0.6"></flat-ui-label>
+        <flat-ui-input-number #num2 [min]="-10" [max]="10" [text]="slidertext" [width]="0.4" [selectable]="selectable" (openinput)="input.opennumpad($event, num2, slidertext)" (change)="slidervalue=$event"></flat-ui-input-number>
+        <flat-ui-input-number [enabled]="false" [min]="-10" [max]="10" [text]="slidertext" [width]="0.4"></flat-ui-input-number>
+      </ngt-group>
+
+      <ngt-group horizontal-layout>
+        <flat-ui-label [text]="'slider'" [width]="0.6"></flat-ui-label>
+        <flat-ui-input-slider [min]="-10" [max]="10" [width]="0.4" [value]="slidervalue" [selectable]="selectable" (change)="slidervalue=$event"></flat-ui-input-slider>
+        <flat-ui-input-slider [enabled]="false" [min]="-10" [max]="10" [width]="0.4" [value]="slidervalue"></flat-ui-input-slider>
+      </ngt-group>
+
+      <ngt-group horizontal-layout>
+        <flat-ui-label [text]="'string'" [width]="0.6"></flat-ui-label>
+        <flat-ui-input-text #tinput [text]="textvalue" [width]="0.4" [selectable]="selectable" (openinput)="input.openkeyboard($event, tinput, textvalue)"></flat-ui-input-text>
+      </ngt-group>
+
+      <ngt-group horizontal-layout>
+        <flat-ui-label [text]="'panel color'" [width]="0.6"></flat-ui-label>
+        <flat-ui-input-color #color [text]="colorvalue" [selectable]="selectable" (change)="colorpicked($event)" (openinput)="input.opencolor($event, color)"></flat-ui-input-color>
+        <flat-ui-input-text #tinput2 [text]="colorvalue" [overflow]="7" [width]="0.5" [enabled]="false"></flat-ui-input-text>
+      </ngt-group>
+
+      <ngt-group horizontal-layout>
+        <flat-ui-label [text]="'options'" [width]="0.6"></flat-ui-label>
+        <flat-ui-select #list1 [width]="1" [selectable]="selectable" (change)="selectedtext=$event" (openinput)="input.openlist($event, list1, list, selectedtext)" [text]="selectedtext"></flat-ui-select>
+      </ngt-group>
+
+      <ngt-group horizontal-layout>
+        <flat-ui-divider [width]="controlwidth-0.1"></flat-ui-divider>
+      </ngt-group>
+
+      <ngt-group horizontal-layout>
+        <flat-ui-label [text]="'text area'" [width]="0.6"></flat-ui-label>
+        <flat-ui-input-textarea #keyboard [width]="1" [text]="textareavalue" [selectable]="selectable"
+                                (change)="textareavalue=$event" (openinput)="input.openkeyboard($event, keyboard, textareavalue)">
+        </flat-ui-input-textarea>
+      </ngt-group>
+      <ngt-group horizontal-layout>
+        <flat-ui-divider [width]="controlwidth-0.1"></flat-ui-divider>
+      </ngt-group>
+
+      <ngt-group horizontal-layout>
+        <flat-ui-label [text]="'tab'" [width]="0.6"></flat-ui-label>
+        <flat-ui-tab-group [enabled]="true" [tabheader]="'above'" [width]="tabcontentwidth" [height]="tabcontentheight" [selectable]="selectable">
+          <flat-ui-tab [label]="'One'" [active]="true" [tabwidth]="0.2">
+            <ng-template let-parent="parent">
+              <ngt-group [appendTo]="parent" horizontal-layout [margin]="0.02" [position]="[-tabcontentwidth/2, tabcontentheight/2-0.1, 0.001]">
+                <flat-ui-button [text]="'Enabled Button'" [width]="0.8" [selectable]="selectable" (pressed)="button($event)"></flat-ui-button>
+              </ngt-group>
+            </ng-template>
+          </flat-ui-tab>
+          <flat-ui-tab [label]="'Two'" [tabwidth]="0.3">
+            <ng-template let-parent="parent">
+              <ngt-group [appendTo]="parent" horizontal-layout [margin]="0.02" [position]="[-tabcontentwidth/2, tabcontentheight/2-0.1, 0.001]">
+                <flat-ui-button [text]="'Disabled Button'" [enabled]="false" [width]="0.8"></flat-ui-button>
+              </ngt-group>
+            </ng-template>
+          </flat-ui-tab>
+          <flat-ui-tab [label]="'Disabled'" [tabwidth]="0.4" [enabled]="false">
+            <ng-template let-parent="parent">
+              <ngt-group [appendTo]="parent" horizontal-layout [margin]="0.02" [position]="[-tabcontentwidth/2, tabcontentheight/2, 0.001]">
+              </ngt-group>
+            </ng-template>
+          </flat-ui-tab>
+          <flat-ui-tab [label]="'Four'" [tabwidth]="0.3">
+            <ng-template let-parent="parent">
+              <ngt-group [appendTo]="parent" horizontal-layout [margin]="0.02" [position]="[-tabcontentwidth/2, tabcontentheight/2-0.1, 0.001]">
+                <flat-ui-button [text]="'Tab four content'" [width]="0.6" [selectable]="selectable"></flat-ui-button>
+              </ngt-group>
+            </ng-template>
+          </flat-ui-tab>
+        </flat-ui-tab-group>
+      </ngt-group>
+
+    </ngt-group>
+  </ng-template>
+</flat-ui-drag-panel>
+
+<ngt-mesh-basic-material #iconmaterial noAppend color="#990000"></ngt-mesh-basic-material>
+
+<flat-ui-drag-panel [title]="'Draggable Panel'" [height]="dragheight" [showclose]="false" [position]="[0, 1.25, -2.5]" [selectable]="selectable">
+  <ng-template let-parent="parent">
+    <ngt-group vertical-layout [margin]="0.02" [appendTo]="parent" [position]="[-0.5, dragheight/2, 0.002]">
+
+      <ngt-group horizontal-layout>
+        <flat-ui-expansion-panel [title]="'Folder1'" [height]="panelheight" [selectable]="selectable">
+          <ng-template let-parent="parent">
+            <ngt-group vertical-layout [margin]="0.02" [appendTo]="parent" [position]="[-0.5, panelheight/2, 0.002]">
+
+              <ngt-group horizontal-layout [margin]="0.01">
+                <flat-ui-label [text]="'icon'" [width]="0.6"></flat-ui-label>
+                <flat-ui-icon [svg]="svg"></flat-ui-icon>
+                <flat-ui-icon [url]="'assets/webgl.svg'" [iconmaterial]="iconmaterial.instance.value"></flat-ui-icon>
+              </ngt-group>
+
+              <ngt-group horizontal-layout [margin]="0.01">
+                <flat-ui-label [text]="'icon button'" [width]="0.6"></flat-ui-label>
+                <flat-ui-icon-button [svg]="svg" [enabled]="false" (pressed)="clicked($event)" [selectable]="selectable"></flat-ui-icon-button>
+                <flat-ui-icon-button [url]="'assets/webgl.svg'" [iconmaterial]="iconmaterial.instance.value" [selectable]="selectable" (pressed)="clicked($event)"></flat-ui-icon-button>
+              </ngt-group>
+
+            </ngt-group>
+          </ng-template>
+
+        </flat-ui-expansion-panel>
+      </ngt-group>
+
+      <ngt-group horizontal-layout>
+        <flat-ui-divider></flat-ui-divider>
+      </ngt-group>
+
+      <ngt-group horizontal-layout [margin]="0.01">
+        <flat-ui-label [text]="'check box'" [width]="0.5"></flat-ui-label>
+        <flat-ui-input-checkbox [position]="[0.4, 0, 0]" [checked]="checked" [selectable]="selectable" (change)="changed($event)"></flat-ui-input-checkbox>
+        <flat-ui-input-checkbox [position]="[0.4, 0, 0]" [enabled]="false" [checked]="checked" [selectable]="selectable" (change)="changed($event)"></flat-ui-input-checkbox>
+      </ngt-group>
+
+      <ngt-group horizontal-layout [margin]="0.01">
+        <flat-ui-label [text]="'toggle'" [width]="0.5"></flat-ui-label>
+        <flat-ui-input-toggle [position]="[0.55, 0, 0]" [checked]="checked" [selectable]="selectable" (change)="changed($event)"></flat-ui-input-toggle>
+        <flat-ui-input-toggle [position]="[0.55, 0, 0]" [enabled]="false" [checked]="checked" [selectable]="selectable" (change)="changed($event)"></flat-ui-input-toggle>
+      </ngt-group>
+
+      <ngt-group horizontal-layout [margin]="0.01">
+        <flat-ui-label [text]="'progress bar'" [width]="0.5"></flat-ui-label>
+      </ngt-group>
+
+      <ngt-group horizontal-layout [margin]="0.01">
+        <flat-ui-progress-bar [value]="slidervalue" [width]="0.98"></flat-ui-progress-bar>
+      </ngt-group>
+
+      <ngt-group horizontal-layout>
+        <flat-ui-divider></flat-ui-divider>
+      </ngt-group>
+
+      <ngt-group horizontal-layout>
+        <flat-ui-button (ready)="confirmobject=$event" [text]="'Confirm'" [selectable]="selectable" (pressed)="confirm()"></flat-ui-button>
+        <flat-ui-button (ready)="promptobject=$event" [text]="'Prompt'" [selectable]="selectable" (pressed)="prompt()"></flat-ui-button>
+      </ngt-group>
+
+    </ngt-group>
+  </ng-template>
+</flat-ui-drag-panel>
+
+<flat-ui-drag-panel *ngIf="showimage" [title]="'Image Panel'" [showexpand]="false" [locked]="true" [scalable]="false" [width]="2" [height]="1.5"
+                    [position]="[-2.5, 1, 0]" [rotation]="[0, 90 | radian, 0]" [selectable]="selectable" (close)="showimage=false">
+  <ng-template let-parent="parent">
+    <ngt-group [appendTo]="parent" [position]="[0, 0, 0.002]">
+      <flat-ui-basic-image [width]="1.95" [height]="1.45" [map]="image" [enabled]="true" [selectable]="selectable" (pressed)="nextimage()"></flat-ui-basic-image>
+    </ngt-group>
+  </ng-template>
+</flat-ui-drag-panel>
+
+<flat-ui-confirm *ngIf="showconfirm" [title]="textareavalue" [width]="1.5" [selectable]="selectable"
+                 [position]="popupposition" [rotation]="popuprotation" [scale]="popupscale"
+                 (result)="log('Confirm result is '+$event);showconfirm=false"></flat-ui-confirm>
+
+<flat-ui-prompt *ngIf="showprompt" [title]="'Enter file name'" [defaultvalue]="'test.txt'"
+                [width]="1.5" [selectable]="selectable"
+                [position]="popupposition" [rotation]="popuprotation" [scale]="popupscale"
+                (result)="log('Prompt result is '+$event);showprompt=false"></flat-ui-prompt>
+
+<flat-ui-list *ngIf="input.showlist" [list]="input.list" [selectedtext]="input.method.text"
+              [position]="input.position" [rotation]="input.rotation" [scale]="scale" [selectable]="selectable"
+              (change)="input.method.text = $event.text;input.showlist=false" (close)="input.showlist=false;input.closeinput()">
+</flat-ui-list>
+
+<flat-ui-color-picker *ngIf="input.showpicker" [colorvalue]="input.method.text"
+                      [position]="input.position" [rotation]="input.rotation" [scale]="scale" [selectable]="selectable"
+                      (colorpicked)="input.method.text = $event;" (close)="input.showpicker=false;input.closeinput()">
+</flat-ui-color-picker>
+
+<flat-ui-keyboard *ngIf="input.showkeyboard" [text]="input.method.text"
+                  [position]="input.position" [rotation]="input.rotation" [scale]="scale" [selectable]="selectable"
+                  (change)="input.method.text = $event" (close)="input.showkeyboard=false;input.closeinput()">
+</flat-ui-keyboard>
+
+<flat-ui-numpad *ngIf="input.shownumpad" [text]="input.method.text"
+                [position]="input.position" [rotation]="input.rotation" [scale]="scale" [selectable]="selectable"
+                (change)="input.method.text = $event" (close)="input.shownumpad=false;input.closeinput()">
+</flat-ui-numpad>
+
+<ng3-gui [position]="[1.6, 1, -2.001]" [rotation]="[0, -30 | radian, 0]" [scale]="0.8"
+         [gui]="themegui" [selectable]="selectable"
+         [showclose]="false" [scalable]="false">
+</ng3-gui>
+
+<vr-controller guipointer showcontroller trackedpointer navhome [guis]="selectable.list"></vr-controller>
+<vr-controller [index]="1" guipointer showcontroller trackedpointer navhome [guis]="selectable.list"></vr-controller>
+
+<ngt-soba-orbit-controls [enableRotate]="true"></ngt-soba-orbit-controls>
